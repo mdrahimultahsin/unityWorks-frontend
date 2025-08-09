@@ -73,7 +73,7 @@ const EventDetails = () => {
     return <Spinner />;
   }
   return (
-    <div className="min-h-screen bg-base-100">
+    <div className="min-h-screen bg-base-100 ">
       {/* Header with Back Button */}
       <div className="navbar bg-base-100 shadow-sm border-b border-base-200 px-6 lg:px-16">
         <div className="navbar-start">
@@ -88,8 +88,7 @@ const EventDetails = () => {
           <h1 className="text-lg font-bold font-heading">Event Details</h1>
         </div>
       </div>
-
-      <div className="max-w-4xl mx-auto px-6 lg:px-16 py-4 md:py-6">
+      <div className="max-w-4xl mx-auto px-4 py-10">
         {/* Hero Image */}
         <div className="relative mb-6">
           <img
@@ -170,7 +169,8 @@ const EventDetails = () => {
                 <span className="font-semibold">Participants</span>
               </div>
               <span className="text-sm text-base-content/70">
-                {eventData.participant || 0} / {eventData.maxParticipant?eventData.maxParticipant:100}
+                {eventData.participant || 0} /{" "}
+                {eventData.maxParticipant ? eventData.maxParticipant : 100}
               </span>
             </div>
             <progress

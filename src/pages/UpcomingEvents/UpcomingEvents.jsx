@@ -220,7 +220,7 @@ const UpcomingEvents = () => {
                   />
                   <div className="absolute top-4 left-4"></div>
                   <div className="absolute top-4 right-4">
-                    <div className="badge badge-neutral badge-lg">
+                    <div className="badge badge-primary badge-lg text-white">
                       <FiTag className="w-3 h-3 mr-1" />
                       {event.eventType}
                     </div>
