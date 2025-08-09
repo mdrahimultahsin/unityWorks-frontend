@@ -25,12 +25,7 @@ const EventDetails = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${import.meta.env.VITE_apiURL}/view-event/${params.id}`, {
-      headers: {
-        authorization: `Bearer ${user?.accessToken}`,
-        email: `${user?.email}`,
-      },
-    })
+    fetch(`${import.meta.env.VITE_apiURL}/view-event/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
         setEventData(data);
@@ -43,6 +38,9 @@ const EventDetails = () => {
   }, [params, user]);
 
   const handleJoinEvent = (eventId) => {
+    if (!user) {
+      return toast.error("Please login to join event");
+    }
     axios
       .post(`${import.meta.env.VITE_apiURL}/join-event`, {
         eventId,
@@ -66,11 +64,7 @@ const EventDetails = () => {
   };
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_apiURL}/already-joined/${id}`, {
-        headers: {
-          email: `${user.email}`,
-        },
-      })
+      .get(`${import.meta.env.VITE_apiURL}/already-joined/${id}`)
       .then((res) => {
         setJoinedStatus(res.data.isJoined);
       });
@@ -176,7 +170,7 @@ const EventDetails = () => {
                 <span className="font-semibold">Participants</span>
               </div>
               <span className="text-sm text-base-content/70">
-                {eventData.participant || 0} / 100
+                {eventData.participant || 0} / {eventData.maxParticipant?eventData.maxParticipant:100}
               </span>
             </div>
             <progress

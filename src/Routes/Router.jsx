@@ -58,8 +58,6 @@ const router = createBrowserRouter([
       {
         path: "view-event/:id",
         element: <EventDetails />,
-
-        hydrateFallbackElement: <Spinner />,
       },
       {
         path: "joined-events",

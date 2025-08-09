@@ -53,6 +53,7 @@ const CreateEvent = () => {
       organizer: user.displayName,
       organizerPhoto: user?.photoURL,
     };
+    console.log(eventData);
     // add event to db
     fetch(`${import.meta.env.VITE_apiURL}/add-event`, {
       method: "POST",
@@ -226,8 +227,6 @@ const CreateEvent = () => {
                     <DatePicker
                       selected={eventDate}
                       onChange={(date) => setEventDate(date)}
-                      // selected={formData.eventDate}
-                      // onChange={handleDateChange}
                       minDate={new Date(Date.now())}
                       dateFormat="MMMM d, yyyy"
                       placeholderText="Select event date"
@@ -240,7 +239,22 @@ const CreateEvent = () => {
                   </div>
                 </div>
               </div>
-
+              {/* Max Participant */}
+              <div>
+                <label className="label">
+                  <span className="label-text text-base font-semibold flex items-center gap-2">
+                    <FiMapPin className="text-accent" />
+                    Max Participant *
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  name="maxParticipant"
+                  placeholder="Ex:100,200"
+                  className={`input input-lg w-full rounded-2xl border-2 transition-all duration-300 border-base-300 focus:border-accent`}
+                  required
+                />
+              </div>
               {/* Right Column */}
               <div className="space-y-6">
                 {/* Thumbnail URL */}
