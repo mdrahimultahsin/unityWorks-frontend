@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import logo from "../assets/logo.png";
 import {BiMenu} from "react-icons/bi";
 import {CiLogout} from "react-icons/ci";
-import {FaClipboardList, FaPlus, FaUser} from "react-icons/fa";
+import {FaClipboardList, FaHandsHelping, FaPlus, FaUser} from "react-icons/fa";
 import {Link, NavLink, useNavigate} from "react-router";
 import {FaGear} from "react-icons/fa6";
 import {RiMenu2Fill} from "react-icons/ri";
@@ -61,7 +61,15 @@ const Navbar = () => {
                   to="/community"
                   className="text-base-content hover:text-primary font-medium px-4 pb-3 rounded-lg text-base hover:bg-base-300 transition-all duration-200"
                 >
-                  <FaUser size={18} color="#4A90E2" /> Community
+                  <FaHandsHelping size={18} color="#4A90E2" /> Community
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/aboutUs"
+                  className="text-base-content hover:text-primary font-medium px-4 pb-3 rounded-lg text-base hover:bg-base-300 transition-all duration-200"
+                >
+                  <FaUser size={18} color="#4A90E2" /> About Us
                 </Link>
               </li>
               {user ? (
@@ -141,14 +149,21 @@ const Navbar = () => {
             >
               📅 Upcoming Events
             </NavLink>
-            
           </li>
           <li>
             <NavLink
               to="/community"
               className="text-base-content hover:text-primary font-medium px-4 py-2 rounded-lg text-base hover:bg-base-300 transition-all duration-200"
             >
-              <FaUser size={18} color="#4A90E2" /> Community
+              <FaHandsHelping size={18} color="#4A90E2" /> Community
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/aboutUs"
+              className="text-base-content hover:text-primary font-medium px-4 py-2 rounded-lg text-base hover:bg-base-300 transition-all duration-200"
+            >
+              <FaUser size={18} color="#4A90E2" /> About Us
             </NavLink>
           </li>
         </ul>

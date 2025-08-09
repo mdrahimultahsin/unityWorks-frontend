@@ -12,6 +12,7 @@ import JoinedEvents from "../pages/JoinedEvents/JoinedEvents";
 import ManageEvents from "../pages/ManageEvents/ManageEvents";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Community from "../pages/Community/Community";
+import AboutUs from "../pages/AboutUs/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
         Component: Community,
         loader: () => fetch(`${import.meta.env.VITE_apiURL}/community`),
         hydrateFallbackElement: <Spinner />,
+      },
+      {
+        path: "aboutUs",
+        Component: AboutUs,
       },
       {
         path: "create-event",
