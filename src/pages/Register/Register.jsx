@@ -5,7 +5,7 @@ import google from "../../assets/google.png";
 
 import Swal from "sweetalert2";
 import logo from "../../assets/logo.png";
-import {MdVisibility, MdVisibilityOff} from "react-icons/md";
+import {MdArrowBack, MdVisibility, MdVisibilityOff} from "react-icons/md";
 import {toast} from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 const Register = () => {
@@ -14,7 +14,7 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const {from} = location.state || {};
- 
+
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
@@ -57,7 +57,15 @@ const Register = () => {
   return (
     <div className="md:w-11/12 mx-auto px-4">
       <div className="  min-h-screen flex items-center justify-center md:gap-5 py-15 md:py-15 px-4 ">
+        
         <div className="max-w-lg border border-primary rounded-2xl  bg-base-300 w-full text-base-content  shadow-lg p-8 ">
+          <button
+          onClick={() => navigate(-1)}
+          className="btn btn-outline btn-primary btn-sm rounded-full flex items-center gap-2 px-4 py-2 text-md hover:bg-primary hover:text-white transition-colors"
+        >
+          <MdArrowBack className="text-xl" />
+          Go Back
+        </button>
           <img className="w-14 mx-auto" src={logo} alt="" />
           <h2 className="text-2xl font-bold  mb-2 text-center mt-3 font-heading">
             Create an account
