@@ -4,7 +4,7 @@ A React-based platform for discovering, creating, and joining social development
 
 ## Live URL
 
-Deployed at: `https://unityworks-da908.web.app/`
+Deployed at: https://unityworks-da908.web.app/
 
 ---
 

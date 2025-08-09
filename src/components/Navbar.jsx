@@ -38,7 +38,7 @@ const Navbar = () => {
           <div
             tabIndex={0}
             role="button"
-            className="cursor-pointer p-2"
+            className="cursor-pointer pr-2"
             onClick={toggleMobileMenu}
           >
             <RiMenu2Fill size={26} />

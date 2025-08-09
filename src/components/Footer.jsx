@@ -57,7 +57,7 @@ const Footer = () => {
       <div className="relative">
         {/* Main Footer Content */}
         <div className="py-16 bg-base-100">
-          <div className="container mx-auto px-4">
+          <div className=" mx-auto px-2">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 px-4 lg:px-16">
               {/* Brand Section */}
               <div className="lg:col-span-1">
@@ -181,7 +181,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="bg-base-300 py-6 border-t border-base-content/10">
-          <div className="container mx-auto px-4">
+          <div className="mx-auto container">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div className="flex items-center gap-2 text-base-content/70">
                 <span>© 2024 UnityWorks. Made with</span>

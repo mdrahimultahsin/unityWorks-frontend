@@ -25,7 +25,7 @@ const Hero = () => {
 
       {/* Main Content */}
       <div className="relative z-10 min-h-screen">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-12 lg:py-20">
+        <div className=" mx-auto px-4 sm:px-6 lg:px-18 py-12 lg:py-20">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[80vh]">
            
             <div className="lg:col-span-7 space-y-8">
