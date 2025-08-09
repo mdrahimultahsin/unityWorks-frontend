@@ -1,11 +1,24 @@
-import React from "react";
-import { FaBullseye, FaEnvelope, FaHandsHelping } from "react-icons/fa";
-import { FiArrowRight, FiCalendar, FiMail } from "react-icons/fi";
+import axios from "axios";
+import {FaBullseye, FaEnvelope, FaHandsHelping} from "react-icons/fa";
+import {FiArrowRight, FiCalendar, FiMail} from "react-icons/fi";
+import {toast} from "react-toastify";
 
 const Newsletter = () => {
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    axios
+      .post(`${import.meta.env.VITE_apiURL}/subscribe`, {email})
+      .then((res) => {
+        if (res.data?.insertedId) {
+          return toast.success("Subcribed successfully");
+        }
+      })
+      .catch(() => {});
+  };
   return (
     <div className="py-20 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 ">
-      <div className="container mx-auto px-8">
+      <div className=" mx-auto px-8">
         <div className=" max-w-4xl mx-auto text-center">
           <div className="bg-base-100/80 backdrop-blur-lg rounded-3xl p-12 shadow-2xl border border-white/20">
             <div className="mb-8">
@@ -24,21 +37,28 @@ const Newsletter = () => {
             </div>
 
             <div className="max-w-md mx-auto">
-              <div className="flex flex-col sm:flex-row gap-4">
+              <form
+                onSubmit={handleSubscribe}
+                className="flex flex-col sm:flex-row gap-4"
+              >
                 <div className="flex-1 relative ">
                   <input
                     type="email"
-                  
                     placeholder="Enter your email address"
+                    name="email"
+                    required
                     className="input input-lg w-full pl-12 pr-4 rounded-full border-2 border-primary/20 focus:border-primary"
                   />
                   <FiMail className="z-[100] absolute left-4 top-1/2 transform -translate-y-1/2 text-primary/60" />
                 </div>
-                <button className="btn btn-primary text-white btn-lg rounded-full px-8 hover:scale-105 transition-transform duration-300">
+                <button
+                  type="submit"
+                  className="btn btn-primary text-white btn-lg rounded-full px-8 hover:scale-105 transition-transform duration-300"
+                >
                   Subscribe
                   <FiArrowRight className="ml-2" />
                 </button>
-              </div>
+              </form>
 
               <p className="text-sm text-base-content/60 mt-4">
                 We respect your privacy. Unsubscribe at any time.

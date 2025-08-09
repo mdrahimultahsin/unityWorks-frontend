@@ -25,7 +25,7 @@ const Feature = () => {
   ]
         return (
                  <div className="py-20 bg-base-300">
-        <div className="container mx-auto px-4">
+        <div className=" mx-auto px-4">
           <div className="text-center mb-10">
             <h2 className="text-4xl md:text-5xl text-base-content mb-6 font-bold font-heading">
               Powerful Features for <span className="text-primary">Community Impact</span>

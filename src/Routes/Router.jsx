@@ -57,11 +57,7 @@ const router = createBrowserRouter([
       },
       {
         path: "view-event/:id",
-        element: (
-          <PrivateRoute>
-            <EventDetails />
-          </PrivateRoute>
-        ),
+        element: <EventDetails />,
 
         hydrateFallbackElement: <Spinner />,
       },

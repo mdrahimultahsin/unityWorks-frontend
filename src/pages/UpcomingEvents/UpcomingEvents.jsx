@@ -209,7 +209,7 @@ const UpcomingEvents = () => {
             {filteredData.map((event) => (
               <div
                 key={event._id}
-                className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 border border-base-200"
+                className="card bg-base-300 shadow-xl hover:shadow-2xl transition-all duration-300 border border-base-200 rounded-2xl"
               >
                 {/* Event Thumbnail */}
                 <figure className="relative">
