@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark;
+}
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+
+  --color-base-100: #FDFDFD;
+  --color-base-200: oklch(95% 0.03 240);
+  --color-base-300: #F5F5F5;
+  --color-base-content: #2C3E50;
+  --color-primary:#2ecc71;
+  --color-primary-content: #7F8C8D;
+  --color-secondary: 	#3498DB;
+  --color-accent: 	#F1C40F;
+  --color-neutral: #99a1af;
+}
+@plugin "daisyui/theme" {
+  name: "dark";
+  /* default:true */
+
+  --color-base-100: 	#111727;
+  --color-base-200: #1E222A;
+  --color-base-300:#0B0C15;
+  --color-base-content: #ECF0F1;
+  --color-primary:#2ecc71;
+  --color-primary-content: oklch(98% 0.01 240);
+  --color-secondary: 	#3498DB;
+  --color-accent: #F4D03F;
+  --color-neutral: #95A5A6;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+@theme {
+  --font-primary: "Roboto", sans-serif;
+  --font-heading: "Nunito", sans-serif;
+}
+
+a.active {
+  color:#2ecc71;
+}
