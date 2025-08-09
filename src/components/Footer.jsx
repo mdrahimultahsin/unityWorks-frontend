@@ -39,18 +39,15 @@ const Footer = () => {
       {name: "Join Event", href: "/joined-events"},
     ],
     company: [
-      {name: "About Us", href: "#"},
-      {name: "Our Mission", href: "#"},
-      {name: "Team", href: "#"},
+      {name: "About Us", href: "/aboutUs"},
+      {name: "Community", href: "/community"},
     ],
     support: [
-      {name: "Help Center", href: "#"},
-      {name: "Contact Support", href: "#"},
-      {name: "Community Guidelines", href: "#"},
+      {name: "Help Center", href: "/contact"},
+      {name: "Contact Support", href: "/contact"},
+      {name: "Community Guidelines", href: "/guideline"},
     ],
   };
-
-  
 
   return (
     <div className="relative  overflow-hidden border-t border-base-200 shadow">
@@ -95,19 +92,34 @@ const Footer = () => {
 
                 {/* Social Links */}
                 <div className="flex gap-3">
-                  <a href="https://www.facebook.com/" target="blank" className="bg-base-300 p-3 rounded-full text-base-content/70 hover:bg-primary hover:text-white transition-all duration-300 hover:scale-110">
+                  <a
+                    href="https://www.facebook.com/"
+                    target="blank"
+                    className="bg-base-300 p-3 rounded-full text-base-content/70 hover:bg-primary hover:text-white transition-all duration-300 hover:scale-110"
+                  >
                     <FaFacebookF className="text-lg" />
                   </a>
-                  <a href="https://www.instagram.com/" target="blank" className="bg-base-300 p-3 rounded-full text-base-content/70 hover:bg-primary hover:text-white transition-all duration-300 hover:scale-110">
+                  <a
+                    href="https://www.instagram.com/"
+                    target="blank"
+                    className="bg-base-300 p-3 rounded-full text-base-content/70 hover:bg-primary hover:text-white transition-all duration-300 hover:scale-110"
+                  >
                     <FaInstagram className="text-lg" />
                   </a>
-                  <a href="https://www.linkedin.com/" target="blank" className="bg-base-300 p-3 rounded-full text-base-content/70 hover:bg-primary hover:text-white transition-all duration-300 hover:scale-110">
+                  <a
+                    href="https://www.linkedin.com/"
+                    target="blank"
+                    className="bg-base-300 p-3 rounded-full text-base-content/70 hover:bg-primary hover:text-white transition-all duration-300 hover:scale-110"
+                  >
                     <FaLinkedinIn className="text-lg" />
                   </a>
-                  <a href="https://www.youtube.com/" target="blank" className="bg-base-300 p-3 rounded-full text-base-content/70 hover:bg-primary hover:text-white transition-all duration-300 hover:scale-110">
+                  <a
+                    href="https://www.youtube.com/"
+                    target="blank"
+                    className="bg-base-300 p-3 rounded-full text-base-content/70 hover:bg-primary hover:text-white transition-all duration-300 hover:scale-110"
+                  >
                     <FaYoutube className="text-lg" />
                   </a>
-                  
                 </div>
               </div>
 
@@ -190,7 +202,6 @@ const Footer = () => {
               </div>
 
               <div className="flex items-center gap-6 text-sm text-base-content/70">
-              
                 <span>🔒 Your data is secure</span>
                 <span>♿ Accessibility friendly</span>
               </div>

@@ -13,6 +13,8 @@ import ManageEvents from "../pages/ManageEvents/ManageEvents";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Community from "../pages/Community/Community";
 import AboutUs from "../pages/AboutUs/AboutUs";
+import Guideline from "../pages/Guideline/Guideline";
+import ContactSection from "../pages/ContactSection/ContactSection";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: "aboutUs",
         Component: AboutUs,
+      },
+      {
+        path: "guideline",
+        Component: Guideline,
+      },
+      {
+        path: "contact",
+        Component: ContactSection,
       },
       {
         path: "create-event",
