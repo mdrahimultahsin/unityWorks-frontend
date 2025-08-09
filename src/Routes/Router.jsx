@@ -24,11 +24,13 @@ const router = createBrowserRouter([
       },
       {
         path: "upcoming-events",
-        Component: UpcomingEvents
+        Component: UpcomingEvents,
       },
       {
         path: "community",
-        Component: Community
+        Component: Community,
+        loader: () => fetch(`${import.meta.env.VITE_apiURL}/community`),
+        hydrateFallbackElement: <Spinner />,
       },
       {
         path: "create-event",
@@ -45,7 +47,7 @@ const router = createBrowserRouter([
             <EventDetails />
           </PrivateRoute>
         ),
-        
+
         hydrateFallbackElement: <Spinner />,
       },
       {
@@ -73,12 +75,11 @@ const router = createBrowserRouter([
         Component: Login,
       },
       {
-        path:"/*",
-        Component:ErrorPage
-      }
+        path: "/*",
+        Component: ErrorPage,
+      },
     ],
   },
- 
 ]);
 
 export default router;
