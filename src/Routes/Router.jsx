@@ -11,6 +11,7 @@ import EventDetails from "../pages/EventDetails/EventDetails";
 import JoinedEvents from "../pages/JoinedEvents/JoinedEvents";
 import ManageEvents from "../pages/ManageEvents/ManageEvents";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import Community from "../pages/Community/Community";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "upcoming-events",
         Component: UpcomingEvents
+      },
+      {
+        path: "community",
+        Component: Community
       },
       {
         path: "create-event",

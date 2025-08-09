@@ -4,7 +4,7 @@ import { FiArrowRight, FiCalendar, FiMail } from "react-icons/fi";
 
 const Newsletter = () => {
   return (
-    <div className="py-20 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10">
+    <div className="py-20 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 ">
       <div className="container mx-auto px-8">
         <div className=" max-w-4xl mx-auto text-center">
           <div className="bg-base-100/80 backdrop-blur-lg rounded-3xl p-12 shadow-2xl border border-white/20">
