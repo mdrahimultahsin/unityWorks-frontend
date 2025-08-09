@@ -53,7 +53,6 @@ const CreateEvent = () => {
       organizer: user.displayName,
       organizerPhoto: user?.photoURL,
     };
-    console.log(eventData);
     // add event to db
     fetch(`${import.meta.env.VITE_apiURL}/add-event`, {
       method: "POST",

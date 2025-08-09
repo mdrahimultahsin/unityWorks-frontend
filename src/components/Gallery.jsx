@@ -53,7 +53,7 @@ const Gallery = () => {
     },
   ]
         return (
-               <div className="py-20 bg-base-100">
+               <div className="py-20 bg-base-300">
         <div className=" mx-auto px-4">
           <div className="text-center mb-10">
             <h2 className="text-4xl md:text-5xl font-bold font-heading text-base-content mb-6">

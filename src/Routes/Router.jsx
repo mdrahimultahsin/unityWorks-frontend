@@ -24,6 +24,8 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+        loader: () => fetch(`${import.meta.env.VITE_apiURL}/events`),
+        hydrateFallbackElement: <Spinner />,
       },
       {
         path: "upcoming-events",

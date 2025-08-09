@@ -3,6 +3,7 @@ import Hero from "../../components/Hero";
 import Newsletter from "../../components/Newsletter";
 import Gallery from "../../components/Gallery";
 import Feature from "../../components/Feature";
+import LatestEvents from "../../components/LatestEvents";
 
 const Home = () => {
   return (
@@ -15,6 +16,10 @@ const Home = () => {
       {/* Feature Section */}
       <section>
         <Feature />
+      </section>
+      {/* Latest Event Section */}
+      <section>
+        <LatestEvents />
       </section>
       {/* Gallery Section */}
       <section>

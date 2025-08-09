@@ -38,7 +38,7 @@ const Community = () => {
           return (
             <div
               key={community.id}
-              className="bg-base-300 rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+              className="bg-base-300 rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300 h-100"
             >
               <img
                 src={community.image}
@@ -48,7 +48,7 @@ const Community = () => {
               <div className="p-5">
                 <h2 className="text-xl text-base-content font-semibold">{community.title}</h2>
                 <p className="text-base-neutral text-sm mt-2">
-                  {community.description}
+                  {community.description.length>50?community.description.slice(0,60)+"...":community.description}
                 </p>
                 <div className="mt-4 text-sm text-gray-500">
                   {community.member} Members
