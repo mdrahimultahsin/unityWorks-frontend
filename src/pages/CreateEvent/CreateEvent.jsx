@@ -1,19 +1,13 @@
-import {useState} from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {FaCalendarAlt, FaCheck, FaArrowLeft} from "react-icons/fa";
-import {
-  FiUpload,
-  FiMapPin,
-  FiCalendar,
-  FiType,
-  FiFileText,
-} from "react-icons/fi";
-import {useNavigate} from "react-router";
+import { FaCalendarAlt, FaCheck, FaArrowLeft } from "react-icons/fa";
+import { FiUpload, FiMapPin, FiCalendar, FiType, FiFileText } from "react-icons/fi";
+import { useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 
 const CreateEvent = () => {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const [showSuccess, setShowSuccess] = useState(false);
@@ -21,17 +15,20 @@ const CreateEvent = () => {
   const [eventDate, setEventDate] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [maxParticipant, setMaxParticipant] = useState("");
   const [titleErrorMsg, setTitleErrorMsg] = useState("");
   const [descriptionErrorMsg, setDescriptionErrorMsg] = useState("");
+  const [maxParticipantError, setMaxParticipantError] = useState("");
+
   const eventTypes = [
-    {value: "", label: "Select Event Type"},
-    {value: "cleanup", label: "🌊 Clean up Drive"},
-    {value: "plantation", label: "🌱 Tree Plantation"},
-    {value: "donation", label: "❤️ Donation Drive"},
-    {value: "education", label: "📚 Educational Workshop"},
-    {value: "healthcare", label: "🏥 Healthcare Camp"},
-    {value: "food", label: "🍽️ Food Distribution"},
-    {value: "awareness", label: "👴 Aware People"},
+    { value: "", label: "Select Event Type" },
+    { value: "cleanup", label: "🌊 Clean up Drive" },
+    { value: "plantation", label: "🌱 Tree Plantation" },
+    { value: "donation", label: "❤️ Donation Drive" },
+    { value: "education", label: "📚 Educational Workshop" },
+    { value: "healthcare", label: "🏥 Healthcare Camp" },
+    { value: "food", label: "🍽️ Food Distribution" },
+    { value: "awareness", label: "👴 Awareness Program" },
   ];
 
   const handleImageInputChange = (e) => {
@@ -43,17 +40,27 @@ const CreateEvent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Validate maxParticipant
+    const maxPartNum = parseInt(maxParticipant, 10);
+    if (isNaN(maxPartNum) || maxPartNum <= 0) {
+      setMaxParticipantError("Please enter a valid number for max participants");
+      return;
+    }
+
     const form = new FormData(e.target);
     const formData = Object.fromEntries(form);
+
     const eventData = {
       ...formData,
-
+      maxParticipant: maxPartNum,
       eventDate: eventDate?.toISOString(),
       email: user.email,
       organizer: user.displayName,
       organizerPhoto: user?.photoURL,
+      participant: 0, // initialize participant count
     };
-    // add event to db
+
+    // Add event to DB
     fetch(`${import.meta.env.VITE_apiURL}/add-event`, {
       method: "POST",
       headers: {
@@ -66,12 +73,12 @@ const CreateEvent = () => {
       .then((data) => {
         if (data.insertedId) {
           setShowSuccess(true);
-
           setTimeout(() => {
             navigate("/upcoming-events");
           }, 3000);
         }
-      });
+      })
+      .catch((err) => console.error(err));
   };
 
   if (showSuccess) {
@@ -86,9 +93,7 @@ const CreateEvent = () => {
               Event Created Successfully!
             </h2>
             <p className="text-base-content/70 mb-6">
-              Your event has been created and will be visible to the
-              upcomingEvents. You'll be redirected to the upcoming events page
-              shortly.
+              Your event has been created and will be visible to upcoming events. You'll be redirected shortly.
             </p>
           </div>
         </div>
@@ -114,7 +119,6 @@ const CreateEvent = () => {
             </h1>
             <p className="text-xl text-base-content/70 max-w-2xl mx-auto">
               Organize a meaningful event that brings your community together
-              for positive change
             </p>
           </div>
         </div>
@@ -124,11 +128,7 @@ const CreateEvent = () => {
           <div className="bg-gradient-to-r from-primary to-secondary p-6">
             <div className="flex items-center gap-3 text-white">
               <div className="bg-white/20 p-2 rounded-full">
-                <img
-                  className="w-10 h-10 rounded-full object-cover"
-                  src={user?.photoURL}
-                  alt=""
-                />
+                <img className="w-10 h-10 rounded-full object-cover" src={user?.photoURL} alt="" />
               </div>
               <div>
                 <h3 className="font-bold">Creating as: {user?.email}</h3>
@@ -149,7 +149,6 @@ const CreateEvent = () => {
                       Event Title *
                     </span>
                   </label>
-
                   <input
                     type="text"
                     name="title"
@@ -163,17 +162,11 @@ const CreateEvent = () => {
                       }
                     }}
                     placeholder="Enter a compelling event title"
-                    className={`input input-lg w-full rounded-2xl border-2 transition-all duration-300 border-base-300 focus:border-primary`}
+                    className="input input-lg w-full rounded-2xl border-2 border-base-300 focus:border-primary"
                     required
                   />
-                  <span className="text-right text-neutral block">
-                    {title.length}/50
-                  </span>
-                  {title.length >= 50 && (
-                    <span className="text-red-500 text-sm">
-                      {titleErrorMsg}
-                    </span>
-                  )}
+                  <span className="text-right text-neutral block">{title.length}/50</span>
+                  {title.length >= 50 && <span className="text-red-500 text-sm">{titleErrorMsg}</span>}
                 </div>
 
                 {/* Event Type */}
@@ -186,7 +179,7 @@ const CreateEvent = () => {
                   </label>
                   <select
                     name="eventType"
-                    className={`select select-lg w-full rounded-2xl border-2 transition-all duration-300 border-base-300 focus:border-secondary text-neutral`}
+                    className="select select-lg w-full rounded-2xl border-2 border-base-300 focus:border-secondary text-neutral"
                     required
                   >
                     {eventTypes.map((type) => (
@@ -208,8 +201,8 @@ const CreateEvent = () => {
                   <input
                     type="text"
                     name="location"
-                    placeholder="Enter event location (e.g., Mirpur, Uttara)"
-                    className={`input input-lg w-full rounded-2xl border-2 transition-all duration-300 border-base-300 focus:border-accent`}
+                    placeholder="Enter event location"
+                    className="input input-lg w-full rounded-2xl border-2 border-base-300 focus:border-accent"
                     required
                   />
                 </div>
@@ -229,31 +222,45 @@ const CreateEvent = () => {
                       minDate={new Date(Date.now())}
                       dateFormat="MMMM d, yyyy"
                       placeholderText="Select event date"
-                      className={`input input-lg w-full rounded-2xl border-2 transition-all duration-300 border-base-300 focus:border-primary `}
+                      className="input input-lg w-full rounded-2xl border-2 border-base-300 focus:border-primary"
                       wrapperClassName="w-full"
                       name="eventDate"
                       required
                     />
-                    <FaCalendarAlt className="absolute right-4 top-1/2 transform -translate-y-1/2 text-primary/60 cursor-pointer pointer-events-none z-10" />
+                    <FaCalendarAlt className="absolute right-4 top-1/2 transform -translate-y-1/2 text-primary/60 pointer-events-none" />
                   </div>
                 </div>
+
+                {/* Max Participant */}
+                <div>
+                  <label className="label">
+                    <span className="label-text text-base font-semibold flex items-center gap-2">
+                      <FiMapPin className="text-accent" />
+                      Max Participant *
+                    </span>
+                  </label>
+                  <input
+                    type="number"
+                    name="maxParticipant"
+                    value={maxParticipant}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value, 10);
+                      if (!isNaN(val) && val > 0) {
+                        setMaxParticipant(val);
+                        setMaxParticipantError("");
+                      } else {
+                        setMaxParticipant("");
+                        setMaxParticipantError("Enter a valid number greater than 0");
+                      }
+                    }}
+                    placeholder="Ex: 100"
+                    className="input input-lg w-full rounded-2xl border-2 border-base-300 focus:border-accent"
+                    required
+                  />
+                  {maxParticipantError && <span className="text-red-500 text-sm">{maxParticipantError}</span>}
+                </div>
               </div>
-              {/* Max Participant */}
-              <div>
-                <label className="label">
-                  <span className="label-text text-base font-semibold flex items-center gap-2">
-                    <FiMapPin className="text-accent" />
-                    Max Participant *
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  name="maxParticipant"
-                  placeholder="Ex:100,200"
-                  className={`input input-lg w-full rounded-2xl border-2 transition-all duration-300 border-base-300 focus:border-accent`}
-                  required
-                />
-              </div>
+
               {/* Right Column */}
               <div className="space-y-6">
                 {/* Thumbnail URL */}
@@ -269,17 +276,12 @@ const CreateEvent = () => {
                     name="thumbnailUrl"
                     onChange={handleImageInputChange}
                     placeholder="https://example.com/image.jpg"
-                    className={`input input-lg w-full rounded-2xl border-2 transition-all duration-300 border-base-300 focus:border-secondary`}
+                    className="input input-lg w-full rounded-2xl border-2 border-base-300 focus:border-secondary"
                     required
                   />
-
-                  {/* Image Preview */}
                   {imagePreview && (
                     <div className="mt-4">
-                      <p className="text-sm text-base-content/70 mb-2">
-                        Preview:
-                      </p>
-
+                      <p className="text-sm text-base-content/70 mb-2">Preview:</p>
                       <img
                         src={imagePreview || "/placeholder.svg"}
                         alt="Event thumbnail preview"
@@ -299,7 +301,7 @@ const CreateEvent = () => {
                   </label>
                   <textarea
                     name="description"
-                    placeholder="Describe your event, its purpose, what participants can expect, and any requirements..."
+                    placeholder="Describe your event..."
                     rows={6}
                     maxLength={1000}
                     value={description}
@@ -308,22 +310,14 @@ const CreateEvent = () => {
                       if (input.length <= 1000) {
                         setDescription(input);
                       } else {
-                        setDescriptionErrorMsg(
-                          "Description must not exceed 1000 characters"
-                        );
+                        setDescriptionErrorMsg("Description must not exceed 1000 characters");
                       }
                     }}
-                    className={`textarea textarea-lg w-full rounded-2xl border-2 transition-all duration-300 resize-none text-base-content border-base-300 focus:border-accent`}
+                    className="textarea textarea-lg w-full rounded-2xl border-2 border-base-300 focus:border-accent"
                     required
                   />
-                  <span className="text-right text-neutral block">
-                    {description.length}/1000
-                  </span>
-                  {description.length >= 1000 && (
-                    <span className="text-red-500 text-sm">
-                      {descriptionErrorMsg}
-                    </span>
-                  )}
+                  <span className="text-right text-neutral block">{description.length}/1000</span>
+                  {description.length >= 1000 && <span className="text-red-500 text-sm">{descriptionErrorMsg}</span>}
                 </div>
               </div>
             </div>
@@ -331,19 +325,11 @@ const CreateEvent = () => {
             {/* Submit Button */}
             <div className="pt-6 border-t border-base-300">
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  type="button"
-                  className="btn bg-base-300 btn-outline btn-lg rounded-full px-8"
-                  onClick={() => navigate(-1)}
-                >
+                <button type="button" className="btn bg-base-300 btn-outline btn-lg rounded-full px-8" onClick={() => navigate(-1)}>
                   Cancel
                 </button>
-                <button
-                  type="submit"
-                  className="btn btn-primary text-white btn-lg rounded-full px-8 hover:scale-105 transition-transform duration-300"
-                >
-                  <FaCheck className="mr-2" />
-                  Create Event
+                <button type="submit" className="btn btn-primary text-white btn-lg rounded-full px-8 hover:scale-105 transition-transform duration-300">
+                  <FaCheck className="mr-2" /> Create Event
                 </button>
               </div>
             </div>
@@ -352,25 +338,14 @@ const CreateEvent = () => {
 
         {/* Help Section */}
         <div className="mt-8 bg-base-100/50 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-base-300">
-          <h3 className="text-lg font-bold text-base-content mb-4">
-            💡 Tips for Creating a Great Event
-          </h3>
+          <h3 className="text-lg font-bold text-base-content mb-4">💡 Tips for Creating a Great Event</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-base-content/70">
-            <div>
-              • Use a clear, descriptive title that explains the event's purpose
-            </div>
-            <div>
-              • Choose high-quality images that represent your event well
-            </div>
+            <div>• Use a clear, descriptive title</div>
+            <div>• Choose high-quality images</div>
             <div>• Provide detailed descriptions</div>
-            <div>
-              • Select appropriate event types to help people find your event
-            </div>
-            <div>• Include specific location details for easy navigation</div>
-            <div>
-              • Plan events at least 24 hours in advance for better
-              participation
-            </div>
+            <div>• Select appropriate event types</div>
+            <div>• Include specific location details</div>
+            <div>• Plan events at least 24 hours in advance</div>
           </div>
         </div>
       </div>
