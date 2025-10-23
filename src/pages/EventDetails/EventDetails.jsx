@@ -63,8 +63,8 @@ const EventDetails = () => {
   const handleJoinEvent = async (eventId) => {
     if (!user) return toast.error("Please login to join event");
 
+    setJoinLoading(true);
     try {
-      setJoinLoading(true); // start button loading
       const res = await axios.post(`${import.meta.env.VITE_apiURL}/join-event`, {
         eventId,
         eventTitle: eventData.title,
@@ -84,22 +84,23 @@ const EventDetails = () => {
           participant: (prev.participant || 0) + 1,
         }));
 
-        // Update participant count in DB
-        await axios.patch(`${import.meta.env.VITE_apiURL}/join-event/${eventId}`);
-
         toast.success(res.data.message || "You have joined the event!");
       } else {
+        // API returned success = false
         toast.error(res.data.message || "Failed to join event");
       }
     } catch (err) {
+      // Network or server error
       console.error(err);
-      toast.error("Failed to join the event");
+      if (err.response?.data?.message) {
+        toast.error(err.response.data.message);
+      } else {
+        toast.error("Failed to join the event. Please try again.");
+      }
     } finally {
-      setJoinLoading(false); // stop button loading
+      setJoinLoading(false);
     }
   };
-
-  console.log(eventData)
 
   if (loading) return <Spinner />;
 

@@ -15,6 +15,9 @@ import Community from "../pages/Community/Community";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import Guideline from "../pages/Guideline/Guideline";
 import ContactSection from "../pages/ContactSection/ContactSection";
+import AddBlog from "../pages/AddBlog/AddBlog";
+import Blogs from "../pages/Blogs/Blogs";
+import BlogDetails from "../pages/BlogDetails/BlogDetails";
 
 const router = createBrowserRouter([
   {
@@ -78,8 +81,30 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "add-blog",
+        element: (
+          <PrivateRoute>
+            <AddBlog />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "register",
         Component: Register,
+      },
+      {
+        path: "blogs",
+        Component: Blogs,
+        
+        loader: () => fetch(`${import.meta.env.VITE_apiURL}/blogs`),
+        hydrateFallbackElement: <Spinner />,
+      },
+      {
+        path: "blogs/:id",
+        Component: BlogDetails,
+        
+        loader: ({params}) => fetch(`${import.meta.env.VITE_apiURL}/blogs/${params.id}`),
+        hydrateFallbackElement: <Spinner />,
       },
       {
         path: "login",
