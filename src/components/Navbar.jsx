@@ -62,7 +62,6 @@ const Navbar = () => {
   };
   fetchNotifications();
 }, [user?.email, apiURL,user]);
-console.log(notifications);
 
   // ✅ Real-time socket notifications
   useEffect(() => {
